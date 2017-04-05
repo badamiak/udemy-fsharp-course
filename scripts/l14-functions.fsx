@@ -21,4 +21,4 @@ let area height width =
     |> half
     |> mul
 
-printfn "%A" ((area 2.0) 1.0)
+printfn "%A" (area 4.0 10.0)
