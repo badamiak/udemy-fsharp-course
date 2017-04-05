@@ -4,6 +4,22 @@
     "version": "0.1.0",
     "command": "fsi",
     "isShellCommand": true,
-    "args": ["${file}"],
-    "showOutput": "always"
+    "args": [],
+    "tasks": [
+        {
+            "taskName": "build",
+            "args": [ "${file}" ],
+            "isBuildCommand": true,
+            "showOutput": "silent",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "restore",
+            "command": "nuget",
+            "args": [ "restore", "-PackagesDirectory", "packages" ],
+            "isBuildCommand": false,
+            "showOutput": "silent",
+            "problemMatcher": "$msCompile"
+        }
+    ]
 }
