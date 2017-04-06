@@ -19,3 +19,17 @@ let naiveLine (endX, endY) (plotter: Plotter) =
     BitmapCommons.naiveLine (startX,startY) (endX,endY) plotter.color plotter.bitmap
 
     {plotter with position = (endX, endY)}
+
+let turn amt (plotter: Plotter) =
+    let p = {plotter with direction = float(plotter.direction + amt) % 360.0}
+    p
+
+let move dist (plotter: Plotter) =
+    let curPos = plotter.position
+    let angle = plotter.direction
+    let startX, startY = curPos
+    let rads = (angle - 90.0) * Math.PI/180.0
+    let endX = (float startX) + float(dist) * cos rads
+    let endY = (float startY) + float(dist) * sin rads
+    let plotted = naiveLine (int endX, int endY) plotter
+    plotted
