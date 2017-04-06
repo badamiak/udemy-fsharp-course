@@ -21,13 +21,6 @@ let plotNaiveLine (endX, endY) (plotter: Plotter) =
 
     {plotter with position = (endX, endY)}
 
-let turn amt (plotter: Plotter) =
-    let p = {plotter with direction = plotter.direction + amt}
-    p
-
-let move dist (plotter: Plotter) =
-    plotter
-
 let start () =
     let plotter = {position = (0,0); color = Color.White; direction = 90.0; bitmap = new Bitmap(256,256)}
     BitmapCommons.fill plotter.bitmap Color.Black

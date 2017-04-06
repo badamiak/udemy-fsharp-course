@@ -18,6 +18,8 @@ let rec naiveLine (x0,y0) (x1,y1) (color:Color) (bitmap:Bitmap) =
         let xLen = float (x1-x0)
         let yLen = float (y1-y0)
 
+        printfn "from (%i,%i) to (%i,%i)" x0 y0 x1 y1
+
         let x0,y0,x1,y1 = if x0 > x1 then x1,y1, x0,y0 else x0,y0,x1,y1
         if xLen <> 0.0 then
             for x in x0..x1 do

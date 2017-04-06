@@ -15,8 +15,7 @@ type Plotter = {
 
 let naiveLine (endX, endY) (plotter: Plotter) =
     let startX, startY = plotter.position
-    // let endX = startX + Math.round (float(distance)*cos(round plotter.direction))
-    // let endY = startY + Math.round (float(distance)*sin(round plotter.direction))
+    
     BitmapCommons.naiveLine (startX,startY) (endX,endY) plotter.color plotter.bitmap
 
     {plotter with position = (endX, endY)}
