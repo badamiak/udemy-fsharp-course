@@ -33,3 +33,9 @@ let move dist (plotter: Plotter) =
     let endY = (float startY) + float(dist) * sin rads
     let plotted = naiveLine (int endX, int endY) plotter
     plotted
+
+let fill (color: Color) (plotter:Plotter) =
+    for x in [0..plotter.bitmap.Width-1] do
+        for y in [0..plotter.bitmap.Height-1] do
+            plotter.bitmap.SetPixel(x,y,color)
+    plotter
