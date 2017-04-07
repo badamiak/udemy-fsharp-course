@@ -39,3 +39,12 @@ let fill (color: Color) (plotter:Plotter) =
         for y in [0..plotter.bitmap.Height-1] do
             plotter.bitmap.SetPixel(x,y,color)
     plotter
+
+let polygon (sides: int) length plotter =
+    let angle = round 360.0 / float sides
+    Seq.fold (fun s i -> 
+        move length s
+        |> turn angle) plotter [1.0..float sides]
+
+let save (path:string) (plotter: Plotter) =
+    plotter.bitmap.Save(path)
