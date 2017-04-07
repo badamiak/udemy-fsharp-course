@@ -3,7 +3,6 @@ open System.IO
 open System
 
 #load "bitmapCommons.fsx"
-#load "math.fsx"
 let path = Path.Combine(__SOURCE_DIRECTORY__, "output", "l22-plotter.png")
 
 type Plotter = {
@@ -21,13 +20,15 @@ let naiveLine (endX, endY) (plotter: Plotter) =
     {plotter with position = (endX, endY)}
 
 let turn amt (plotter: Plotter) =
-    let p = {plotter with direction = float(plotter.direction + amt) % 360.0}
-    p
+    let newDir = plotter.direction + amt
+    let angled = {plotter with direction = newDir}
+    angled
 
 let move dist (plotter: Plotter) =
     let curPos = plotter.position
     let angle = plotter.direction
-    let startX, startY = curPos
+    let startX = fst curPos
+    let startY = snd curPos
     let rads = (angle - 90.0) * Math.PI/180.0
     let endX = (float startX) + float(dist) * cos rads
     let endY = (float startY) + float(dist) * sin rads
@@ -41,10 +42,9 @@ let fill (color: Color) (plotter:Plotter) =
     plotter
 
 let polygon (sides: int) length plotter =
-    let angle = round 360.0 / float sides
-    Seq.fold (fun s i -> 
-        move length s
-        |> turn angle) plotter [1.0..float sides]
+    let angle = Math.Round(360.0 / float sides)
+    printfn "polygon angle %A" angle
+    Seq.fold (fun s i -> turn angle (move length s)) plotter [1.0..(float sides)]
 
 let save (path:string) (plotter: Plotter) =
     plotter.bitmap.Save(path)

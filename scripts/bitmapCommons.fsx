@@ -1,4 +1,5 @@
 open System.Drawing
+open System
 
 
 let setPixelsBlock (bitmap:Bitmap) x y sizeMultiplier color =
@@ -24,14 +25,14 @@ let rec naiveLine (x0,y0) (x1,y1) (color:Color) (bitmap:Bitmap) =
         if xLen <> 0.0 then
             for x in x0..x1 do
                 let proportion = float (x-x0) / xLen
-                let y = (int (round (proportion * yLen))) + y0
+                let y = (int (Math.Round (proportion * yLen))) + y0
                 bitmap.SetPixel(x,y,color)
         
         let x0,y0,x1,y1 = if y0 > y1 then x1,y1,x0,y0 else x0,y0,x1,y1                
         if yLen <> 0.0 then
             for y in y0..y1 do
                 let proportion = float (y-y0) / yLen
-                let x = (int (round (proportion * xLen))) + x0
+                let x = (int (Math.Round (proportion * xLen))) + x0
                 bitmap.SetPixel(x,y,color)
     draw()
 
