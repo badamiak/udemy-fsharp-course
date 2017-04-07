@@ -33,5 +33,4 @@ let finished = move 15 plotter
             |> move 30
             |> turn -90.0
             |> move 15
-
-finished.bitmap.Save(path)
+            |> fun (p:Plotting.Plotter) -> p.bitmap.Save(path)
