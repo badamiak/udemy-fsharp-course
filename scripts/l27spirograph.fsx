@@ -4,13 +4,13 @@ open System.IO
 
 let path = Path.Combine(__SOURCE_DIRECTORY__, "output", "l27-spirograph.png")
 let initialPlotter : Plotting.Plotter = Plotting.fill Color.Black {
-    position = (200,200)
+    position = (2000,2000)
     direction = 90.0
     color = Color.White
-    bitmap = new Bitmap(400,400)
+    bitmap = new Bitmap(4000,4000)
     }
 
-let cmdsStripe = [Plotting.move 15; Plotting.turn 15.0; Plotting.polygon 3 10 ]
+let cmdsStripe = [ Plotting.polygon 3 100; Plotting.move 150; Plotting.turn 15.0; ]
 
 let cmdGen = seq { while true do yield! cmdsStripe}
 
