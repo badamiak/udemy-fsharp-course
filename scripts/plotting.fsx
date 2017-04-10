@@ -48,3 +48,20 @@ let polygon (sides: int) length plotter =
 
 let save (path:string) (plotter: Plotter) =
     plotter.bitmap.Save(path)
+
+let moveTo (x,y) plotter =
+    {plotter with position = (x,y)}
+    
+let changeColor color plotter =
+    {plotter with color = color}
+
+let quasiCircle (divisor: float) (sides: int) length plotter =
+    let angle = Math.Round(360.0 / float sides)
+    printfn "polygon angle %A" angle
+    Seq.fold (fun s i -> turn angle (move length s)) plotter [1.0..(float sides/divisor)]
+let generateSpirograph cmdStripe times fromPlotter=
+    let cmdsGen = 
+        seq{ while true do yield! cmdStripe}
+    let cmds = cmdsGen |> Seq.take (times*(List.length cmdStripe))
+    cmds
+    |> Seq.fold ((|>)) fromPlotter
